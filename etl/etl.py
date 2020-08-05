@@ -1,5 +1,13 @@
+#! /usr/bin/python3
 import csv
 import psycopg2
+
+vinputfile="/home/mustafa/Desktop/Senior Data Engineer - agaricus-lepiota-Aug.csv"
+vhost = ""
+vdatabase= ""
+vuser= ""
+vpassword= ""
+
 
 shape_map = {
     "b": "bell",
@@ -81,10 +89,10 @@ def insert_list(liste):
     conn = None
     try:
         conn = psycopg2.connect(
-            host="localhost",
-            database="interview",
-            user="postgres",
-            password="password")
+            host=vhost, ,
+            database=vdatabase, 
+            user=vuser,
+            password=vpassword)
 
         cur = conn.cursor()
 
@@ -101,7 +109,7 @@ def insert_list(liste):
 
 
 def readfile():
-    with open("/home/mustafa/Desktop/Senior Data Engineer - agaricus-lepiota-Aug.csv",  newline='') as csvfile:
+    with open(vinputfile ,  newline='') as csvfile:
         #skip header
         next(csvfile)
         reader = csv.DictReader(csvfile, fieldnames=('cap_shape', 'cap_color', 'odor', 'gill_size', 'gill_color',
@@ -128,6 +136,5 @@ def readfile():
 
 
 if __name__ == '__main__':
-    print("x1")
     readfile()
-    print("y2")
+
